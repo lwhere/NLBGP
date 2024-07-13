@@ -121,17 +121,22 @@ for user_content in tqdm(user_content_list):
     #     messages=message,
     #     temperature=0.0  # Optional
     #     )
-    openai_chat_completion = openai_client.chat.completions.create(
+    gpt_3__5_chat_completion = openai_client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=messages,
+        temperature=0.0,
+    )
+    gpt_4o_chat_completion = openai_client.chat.completions.create(
         model="gpt-4o",
         messages=messages,
         temperature=0.0,
     )
-    openai_turbo_chat_completion = openai_client.chat.completions.create(
+    gpt_4_turbo_chat_completion = openai_client.chat.completions.create(
         model="gpt-4-turbo",
         messages=messages,
         temperature=0.0,
     )
-    claude_chat_completion = openai_client.chat.completions.create(
+    claude_3__5_sonnet_chat_completion = openai_client.chat.completions.create(
         model="claude-3-5-sonnet-20240620",
         messages=messages,
         temperature=0.0,
@@ -141,22 +146,26 @@ for user_content in tqdm(user_content_list):
     # llama3_8b_output=llama3_8b_chat_completion.choices[0].message.content
     # mistral_8_7b_output=mistral_8_7b_chat_completion.choices[0].message.content
     # gemma_7b_output=gemma_7b_chat_completion.choices[0].message.content
-    gpt4_output = openai_chat_completion.choices[0].message.content
-    gpt4_turbo_output = openai_turbo_chat_completion.choices[0].message.content
-    claude3__5_output = claude_chat_completion.choices[0].message.content
+    gpt_3__5_turbo_output = gpt_3__5_chat_completion.choices[0].message.content
+    gpt_4o_output = gpt_4o_chat_completion.choices[0].message.content
+    gpt_4_turbo_output = gpt_4_turbo_chat_completion.choices[0].message.content
+    claude_3__5_output = claude_3__5_sonnet_chat_completion.choices[0].message.content
     user_content["llama3-70b-answer"] = llama3_70b_output
     user_content["llama3-70b-answer-list"] = pattern.findall(llama3_70b_output)
     # user_content["mistral-8-7b-answer"] = mistral_8_7b_output
     # user_content["llama3-8b-answer"] = llama3_8b_output
     # user_content["gemma-7b-answer"] = gemma_7b_output
-    user_content["gpt-4o-answer"] = gpt4_output
-    user_content["gpt-4o-answer-list"] = pattern.findall(gpt4_output)
-    user_content["gpt-4-turbo-answer"] = gpt4_turbo_output
+    user_content["gpt-3.5-turbo"] = gpt_3__5_turbo_output
+    user_content["gpt-3.5-turbo-answer-list"] = pattern.findall(
+        gpt_3__5_turbo_output)
+    user_content["gpt-4o-answer"] = gpt_4o_output
+    user_content["gpt-4o-answer-list"] = pattern.findall(gpt_4o_output)
+    user_content["gpt-4-turbo-answer"] = gpt_4_turbo_output
     user_content["gpt-4-turbo-answer-list"] = pattern.findall(
-        gpt4_turbo_output)
-    user_content["claude-3-5-sonnet-20240620-answer"] = claude3__5_output
+        gpt_4_turbo_output)
+    user_content["claude-3-5-sonnet-20240620-answer"] = claude_3__5_output
     user_content["claude-3-5-sonnet-20240620-answer-list"] = pattern.findall(
-        claude3__5_output)
+        claude_3__5_output)
     # print(user_content)
     output_list.append(user_content)
     with open("/home/yyc/NLGraph/BGPAgent/program_data/cache/cache.json", "w", encoding='utf-8') as f:
