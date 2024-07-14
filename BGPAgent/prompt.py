@@ -1,4 +1,3 @@
-
 naive_prompt = """
 你是一个BGP商业关系判断专家，请根据以下信息判断两个AS（自治域系统）之间的BGP商业关系
 输入：<AS Path>， <clique>， <传输度>
@@ -41,29 +40,27 @@ system_prompt_rule = """
 zero_shot_system_prompt = f"""
 You are a BGP (Border Gateway Protocol) business relationship expert. Please determine the BGP business relationships between AS(Autonomous Systems) based on the following information:
 
-Input: <AS Path>, additional information (such as <clique>, <transit degree>, etc.)
+[Input]: <AS Path>, additional information (such as <clique>, <transit degree>, etc.)
 
 <Business Relationship>: Please infer the business relationship between AS node pairs in the <AS Path>. The types of business relationships are p2c(provider-to-customer) and p2p(peer-to-peer).
 
 You need to output the business relationship between each AS pair in the following format:
-output_format: ASN1-ASN2: <Business Relationship>, after analyzing every AS pair in the <AS Path>, you must return the results as a list which looks like["ASN1-ASN2: ", "ASN3-ASN4: ", ...]
+[Output]: ASN1-ASN2: <Business Relationship>, after analyzing every AS pair in the <AS Path>, you must return the results as a list which looks like["ASN1-ASN2: ", "ASN3-ASN4: ", ...]
 """
 
 
 one_shot_system_prompt = f"""
-You are a BGP (Border Gateway Protocol) business relationship expert. Please determine the BGP business relationships between Autonomous Systems (AS) based on the following information and identify any potential route leakage:
+You are a BGP (Border Gateway Protocol) business relationship expert. Please determine the BGP business relationships between AS(Autonomous Systems) based on the following information:
 
-Input: <AS Path>, additional information (such as <clique>, <transit degree>, etc.)
+[Input]: <AS Path>, additional information (such as <clique>, <transit degree>, etc.)
 
-<Business Relationship>: Please infer the business relationships between AS node pairs in the <AS Path>. The types of business relationships are p2c (provider-to-customer) and p2p (peer-to-peer).
+<Business Relationship>: Please infer the business relationship between AS node pairs in the <AS Path>. The types of business relationships are p2c(provider-to-customer) and p2p(peer-to-peer).
 
 I'll give you an example to help you understand the task:
-Example1: AS Path: 3356-1239-721, transit degree: 3286, 989, 6, clique member: 1239, 3356, VP: 1239, 3356
-output_format: ["3356-1239": p2p,"1239-721": p2c]
+Example1: 
+[Input]: AS Path: 3356-1239-721, transit degree: 3286, 989, 6, clique member: 1239, 3356, VP: 1239, 3356
+[Output]: ["3356-1239": p2p,"1239-721": p2c]
 
-You need to:
-
-Output the business relationships between each AS pair in the following format:
-output_format: ASN1-ASN2: <Business Relationship>, after analyzing every AS pair in the <AS Path>, 
-you must return the results as a list in the form: ["ASN1-ASN2: ", "ASN3-ASN4: ", ...]
+You need to output the business relationship between each AS pair in the following format:
+[Output]: ASN1-ASN2: <Business Relationship>, after analyzing every AS pair in the <AS Path>, you must return the results as a list which looks like["ASN1-ASN2: ", "ASN3-ASN4: ", ...]
 """
