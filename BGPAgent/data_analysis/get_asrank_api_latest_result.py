@@ -77,9 +77,9 @@ async def main(input_path):
 # 运行主函数
 if __name__ == "__main__":
     # 运行完filter脚本得到的json结果
-    input_path = "/Users/hugo/Projects/NLBGP/BGPAgent/filtered_data/bgpleak_different_length/as_path_length_18.json"
+    input_path = "/Users/hugo/Projects/NLBGP/BGPAgent/filtered_data/bgpleak_filtered.json"
     as_information_list = asyncio.run(main(input_path))
-    output_path = "/Users/hugo/Projects/NLBGP/BGPAgent/filtered_data/as_information_latest_result.json"
+    output_path = "/Users/hugo/Projects/NLBGP/BGPAgent/filtered_data/bgpleak_filtered_as_information_latest_result.json"
     # 将数据写入到JSON文件中
     with open(output_path, 'w', encoding='utf-8') as json_file:
         json.dump(as_information_list, json_file, ensure_ascii=False, indent=4)
