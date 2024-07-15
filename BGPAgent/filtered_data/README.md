@@ -12,3 +12,5 @@ Number of objects with as_path length 19: 2
 Number of objects with as_path length 6: 54
 Number of objects with as_path length 17: 2
 Number of objects with as_path length 18: 2
+Number of different as_path lengths: 14
+Number of objects: 1014
